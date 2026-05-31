@@ -202,7 +202,7 @@
                 <div class="card h-100">
                     <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:120px">
                         @if($p->image)
-                            <img src="{{ Storage::url($p->image) }}" class="img-fluid h-100 w-100 object-fit-cover" alt="{{ $p->name }}">
+                            <img src="{{ Storage::url($p->image) }}" class="img-fluid h-100 w-100 object-fit-contain" alt="{{ $p->name }}">
                         @else
                             <i class="bi bi-image text-muted" style="font-size:2rem"></i>
                         @endif

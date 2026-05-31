@@ -33,6 +33,7 @@
             <thead class="table-light">
                 <tr>
                     <th>#</th>
+                    <th>Gambar</th>
                     <th>Produk</th>
                     <th>Kategori</th>
                     <th>Harga</th>
@@ -46,6 +47,13 @@
                 @forelse($products as $i => $product)
                 <tr>
                     <td class="text-muted small">{{ $products->firstItem() + $i }}</td>
+                    <td style="width:90px;">
+                        @if($product->image)
+                            <img src="{{ Storage::url($product->image) }}" class="img-thumbnail" style="width:64px;height:64px;object-fit:cover;" alt="{{ $product->name }}">
+                        @else
+                            <span class="text-muted">-</span>
+                        @endif
+                    </td>
                     <td>
                         <div class="fw-semibold">{{ $product->name }}</div>
                         @if($product->liquid_type !== 'kosong')
@@ -79,7 +87,7 @@
                     </td>
                 </tr>
                 @empty
-                <tr><td colspan="8" class="text-center text-muted py-5">Belum ada produk</td></tr>
+                <tr><td colspan="9" class="text-center text-muted py-5">Belum ada produk</td></tr>
                 @endforelse
             </tbody>
         </table>

@@ -12,6 +12,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        /** @var \Illuminate\Database\Eloquent\Builder $query */
         $query = Product::with('category');
 
         if ($request->filled('search')) {
@@ -22,6 +23,7 @@ class ProductController extends Controller
             $query->where('category_id', $request->category_id);
         }
 
+        /** @var \Illuminate\Pagination\LengthAwarePaginator $products */
         $products   = $query->latest()->paginate(15)->withQueryString();
         $categories = Category::all();
 
@@ -51,7 +53,8 @@ class ProductController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('products', 'public');
+            $category = Category::findOrFail($data['category_id']);
+            $data['image'] = $request->file('image')->store($this->imageDirectory($category), 'public');
         }
 
         $data['is_active'] = $request->boolean('is_active', true);
@@ -65,6 +68,11 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         return view('admin.products.edit', compact('product', 'categories'));
+    }
+
+    private function imageDirectory(Category $category): string
+    {
+        return 'images/produk/' . $category->slug;
     }
 
     public function update(Request $request, Product $product)
@@ -87,7 +95,8 @@ class ProductController extends Controller
             if ($product->image) {
                 Storage::disk('public')->delete($product->image);
             }
-            $data['image'] = $request->file('image')->store('products', 'public');
+            $category = Category::findOrFail($data['category_id']);
+            $data['image'] = $request->file('image')->store($this->imageDirectory($category), 'public');
         }
 
         $data['is_active'] = $request->boolean('is_active');

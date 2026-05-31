@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,32 +22,33 @@
     <style>
         *,
         *::before,
-        *::after{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body{
-            font-family:'Poppins',sans-serif;
-            background:#fff;
-            color:#111;
-            overflow-x:hidden;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fff;
+            color: #111;
+            overflow-x: hidden;
         }
 
-        a{
-            text-decoration:none;
-            color:inherit;
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
-        ul{
-            list-style:none;
+        ul {
+            list-style: none;
         }
 
-        img{
-            display:block;
-            max-width:100%;
+        img {
+            display: block;
+            max-width: 100%;
         }
+
         /* =============================================
            NAVBAR
         ============================================= */
@@ -144,13 +146,13 @@
         }
 
         .nav-menu {
-             display:flex;
-            width:100%;
-            justify-content:space-between;
-            align-items:center;
-            list-style:none;
-            margin:0;
-            padding:0;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
         .nav-menu li {
@@ -186,9 +188,9 @@
             z-index: 9999;
         }
 
-        .navbar .dropdown-menu{
-        display:block !important;
-    }
+        .navbar .dropdown-menu {
+            display: block !important;
+        }
 
         .has-dropdown:hover>.dropdown-menu {
             opacity: 1;
@@ -224,7 +226,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             min-width: 160px;
             padding: 6px 0;
-            display: none;            
+            display: none;
             z-index: 9999;
         }
 
@@ -403,8 +405,9 @@
         }
 
         .alamat-wrap i {
-            margin-top: 4px; 
-            color: #ff4d4d; /* Warna diubah menjadi merah */
+            margin-top: 4px;
+            color: #ff4d4d;
+            /* Warna diubah menjadi merah */
             font-size: 16px;
         }
 
@@ -481,10 +484,11 @@
             font-size: 12px;
         }
     </style>
-@stack('styles')
+    @stack('styles')
 </head>
+
 <body>
- <nav class="navbar">
+    <nav class="navbar">
         <div class="navbar-inner">
 
             {{-- LOGO --}}
@@ -566,7 +570,8 @@
                         <a href="{{ route('pelanggan.cart') }}" style="position:relative">
                             <i class="fa-solid fa-cart-shopping"></i>
                             @php $cartCount = auth()->user()->carts()->count(); @endphp
-                            <span id="cart-badge" class="cart-badge" style="{{ $cartCount ? '' : 'display:none;' }}">{{ $cartCount }}</span>
+                            <span id="cart-badge" class="cart-badge"
+                                style="{{ $cartCount ? '' : 'display:none;' }}">{{ $cartCount }}</span>
                         </a>
                     @else
                         <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
@@ -618,9 +623,9 @@
     </nav>
 
     <main>
-    @yield('content')
-</main>
-<footer class="footer" id="footer">
+        @yield('content')
+    </main>
+    <footer class="footer" id="footer">
         <div class="footer-inner">
 
             {{-- LOGO --}}
@@ -634,7 +639,7 @@
                 <a href="{{ route('home') }}">Beranda</a>
                 <a href="{{ route('catalog') }}">Kategori Produk</a>
                 <a href="{{ route('spk') }}">Rekomendasi</a>
-                <a href="{{route('kontak')}}">Kontak Kami</a>
+                <a href="{{ route('kontak') }}">Kontak Kami</a>
             </div>
 
             {{-- SOCIAL --}}
@@ -683,4 +688,5 @@
     </footer>
     @stack('scripts')
 </body>
+
 </html>

@@ -78,7 +78,7 @@
                             <a href="{{ route('product.detail', $rec) }}" class="text-decoration-none">
                                 <div class="d-flex align-items-center justify-content-center bg-light" style="height:120px;overflow:hidden">
                                     @if($rec->image)
-                                        <img src="{{ Storage::url($rec->image) }}" class="img-fluid h-100 w-100 object-fit-cover" alt="{{ $rec->name }}">
+                                        <img src="{{ Storage::url($rec->image) }}" class="img-fluid h-100 w-100 object-fit-contain" alt="{{ $rec->name }}">
                                     @else
                                         <i class="bi bi-image text-muted" style="font-size:2rem"></i>
                                     @endif
@@ -133,7 +133,7 @@
                             <a href="{{ route('product.detail', $product) }}" class="text-decoration-none">
                                 <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height:150px;overflow:hidden">
                                     @if($product->image)
-                                        <img src="{{ Storage::url($product->image) }}" class="img-fluid h-100 w-100 object-fit-cover" alt="{{ $product->name }}">
+                                        <img src="{{ Storage::url($product->image) }}" class="img-fluid h-100 w-100 object-fit-contain" alt="{{ $product->name }}">
                                     @else
                                         <i class="bi bi-image text-muted" style="font-size:2.5rem"></i>
                                     @endif

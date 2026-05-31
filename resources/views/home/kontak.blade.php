@@ -1,4 +1,4 @@
-{{-- resources/views/home/index.blade.php --}}
+{{-- resources/views/home/kontak.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 
@@ -18,6 +18,8 @@
     {{-- ICONS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
 
     <style>
         /* =============================================
@@ -375,95 +377,6 @@
         }
 
         /* =============================================
-           HERO SLIDER
-        ============================================= */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 650px;
-            overflow: hidden;
-            background: #111;
-        }
-
-        .hero-slide {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            animation: heroFade 15s infinite;
-        }
-
-        .hero-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-slide:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .hero-slide:nth-child(2) {
-            animation-delay: 5s;
-        }
-
-        .hero-slide:nth-child(3) {
-            animation-delay: 10s;
-        }
-
-        @keyframes heroFade {
-            0% {
-                opacity: 0;
-            }
-
-            5% {
-                opacity: 1;
-            }
-
-            30% {
-                opacity: 1;
-            }
-
-            35% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 0;
-            }
-        }
-
-        /* =============================================
-           PROMO BANNERS
-        ============================================= */
-        .promo-section {
-            width: 100%;
-            max-width: 1500px;
-            margin: 20px auto;
-            padding: 0 30px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .promo-section a {
-            display: block;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .promo-section img {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .promo-section a:hover img {
-            transform: scale(1.02);
-        }
-
-        /* =============================================
            SECTION HEADER
         ============================================= */
         .section-wrap {
@@ -491,132 +404,6 @@
             font-size: 11px;
             color: #888;
             margin-top: 2px;
-        }
-
-        /* =============================================
-           PRODUCT GRID
-        ============================================= */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 16px;
-            margin-top: 18px;
-        }
-
-        /* PRODUCT CARD */
-        .prod-card {
-            background: #fff;
-            border: 1px solid #e8e8e8;
-            border-radius: 10px;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            transition: box-shadow 0.25s, transform 0.25s;
-        }
-
-        .prod-card:hover {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10);
-            transform: translateY(-4px);
-        }
-
-        .prod-card a.card-link {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            color: #111;
-        }
-
-        .prod-card .prod-img {
-            width: 100%;
-            height: 180px;
-            object-fit: contain;
-            border-radius: 6px;
-            background: #fafafa;
-            margin-bottom: 12px;
-        }
-
-        .prod-card .prod-cat {
-            font-size: 10px;
-            color: #fff;
-            background: #111;
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 20px;
-            margin-bottom: 6px;
-            align-self: flex-start;
-        }
-
-        .prod-card .prod-name {
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 1.45;
-            color: #111;
-            flex: 1;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-bottom: 8px;
-        }
-
-        .prod-card .prod-price {
-            font-size: 14px;
-            font-weight: 800;
-            color: #111;
-            margin-bottom: 12px;
-        }
-
-        .prod-card .buy-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 36px;
-            background: #111;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .prod-card .buy-btn:hover {
-            background: #333;
-        }
-
-        /* =============================================
-           NEW ARRIVAL BANNER
-        ============================================= */
-        .new-arrival-section {
-            width: 100%;
-            max-width: 1440px;
-            margin: 0 auto 10px;
-            padding: 0 30px 20px;
-        }
-
-        .new-arrival-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #111;
-            margin-bottom: 18px;
-        }
-
-        .new-arrival-banner {
-            width: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .new-arrival-banner img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
         }
 
         /* =============================================
@@ -864,6 +651,36 @@
             justify-content: center;
         }
 
+        /* Alamat */
+        .contact-card .fa-location-dot {
+            color: #EF4444;
+            /* Merah */
+        }
+
+        /* Telepon / WhatsApp */
+        .contact-card .fa-phone {
+            color: #00ac3f;
+            /* Hijau WhatsApp */
+        }
+
+        /* Email */
+        .contact-card .fa-envelope {
+            color: #3B82F6;
+            /* Biru */
+        }
+
+        /* Instagram */
+        .contact-card .fa-instagram {
+            color: #ff00b3;
+            /* Pink Instagram */
+        }
+
+        /* Jam Operasional */
+        .contact-card .fa-clock {
+            color: #F59E0B;
+            /* Kuning Orange */
+        }
+
         /* Responsive */
 
         @media (max-width: 992px) {
@@ -1098,7 +915,7 @@
                 </div>
 
             </div>
-            
+
         </div>
 
     </section>

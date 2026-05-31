@@ -108,7 +108,7 @@
 
 @push('styles')
 <style>
-    .btn-vs { background:#ff6b35;border-color:#ff6b35;color:#fff; }
-    .btn-vs:hover { background:#e55a25;color:#fff; }
+    .btn-vs { background:#ffffff;border-color:#000000;color:#000000; }
+    .btn-vs:hover { background:#000000;color:#fff; }
 </style>
 @endpush

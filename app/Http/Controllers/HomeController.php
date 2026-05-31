@@ -133,4 +133,9 @@ class HomeController extends Controller
 
         return view('home.detail', compact('product', 'related'));
     }
+
+    public function kontak()
+    {
+        return view('home.kontak');
+    }
 }

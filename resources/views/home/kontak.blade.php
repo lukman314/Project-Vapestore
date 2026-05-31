@@ -782,6 +782,121 @@
                 gap: 10px;
             }
         }
+
+        /* ============================================= CONTACT PAGE ============================================= */
+
+        .contact-page {
+            padding: 15px 30px 80px;
+            background: #fff;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .contact-header h1 {
+            font-size: 58px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .contact-header p {
+            max-width: 750px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .contact-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .contact-card {
+            width: 380px;
+            min-height: 260px;
+
+            background: #fff;
+            border: 1px solid #ececec;
+            border-radius: 18px;
+
+            padding: 40px 30px;
+
+            text-align: center;
+
+            transition: .3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .08);
+        }
+
+        .contact-card i {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .contact-card p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .center-row {
+            justify-content: center;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 992px) {
+
+            .contact-header h1 {
+                font-size: 48px;
+            }
+
+            .contact-card {
+                min-height: auto;
+            }
+
+        }
+
+        @media (max-width: 768px) {
+
+            .contact-page {
+                padding: 20px 20px 60px;
+            }
+
+            .contact-header h1 {
+                font-size: 40px;
+            }
+
+            .contact-header p {
+                font-size: 16px;
+            }
+
+            .contact-card {
+                padding: 30px 20px;
+            }
+
+        }
     </style>
 </head>
 
@@ -928,329 +1043,65 @@
         </div>
     </nav>
 
-    {{-- ======================================================
-         HERO SLIDER
-    ====================================================== --}}
-    <div class="hero">
-        <div class="hero-slide">
-            <img src="{{ asset('images/Hero/hero.png') }}" alt="Hero 1">
-        </div>
-        <div class="hero-slide">
-            <img src="{{ asset('images/Hero/hero2.png') }}" alt="Hero 2">
-        </div>
-        <div class="hero-slide">
-            <img src="{{ asset('images/Hero/hero3.png') }}" alt="Hero 3">
-        </div>
-    </div>
+    <section class="contact-page">
 
-    {{-- ======================================================
-         PROMO BANNERS
-    ====================================================== --}}
-    <div class="promo-section">
-        <a href="{{ route('catalog') }}">
-            <img src="{{ asset('images/promo/promo1.png') }}" alt="Promo 1">
-        </a>
-        <a href="{{ route('catalog') }}">
-            <img src="{{ asset('images/promo/promo2.png') }}" alt="Promo 2">
-        </a>
-    </div>
+        <div class="contact-header">
+            <h1>Kontak Kami</h1>
 
-    {{-- ======================================================
-         TWINS REKOMENDASI
-    ====================================================== --}}
-    <div class="section-wrap">
-        <div class="section-header">
-            <h2>Twins Rekomendasi</h2>
-            <p>Produk pilihan terbaik dari Twins Vapor untuk kamu.</p>
+            <p>
+                Kami siap membantu Anda jika memiliki pertanyaan,
+                membutuhkan rekomendasi produk, atau ingin mengetahui
+                informasi lebih lanjut.
+            </p>
         </div>
 
-        <div class="product-grid">
-            @forelse ($featuredProducts->take(4) as $product)
-                <div class="prod-card">
-                    <a href="{{ route('product.detail', $product) }}" class="card-link">
-                        <img class="prod-img"
-                            src="{{ $product->image ? Storage::url($product->image) : asset('images/no-image.png') }}"
-                            alt="{{ $product->name }}">
-                        <span class="prod-cat">{{ $product->category->name ?? 'Twins Vapor' }}</span>
-                        <div class="prod-name">{{ $product->name }}</div>
-                        <div class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                    </a>
-                    @auth
-                        @if (auth()->user()->isPelanggan())
-                            <form action="{{ route('pelanggan.cart.add', $product) }}" method="POST"
-                                class="ajax-cart-form">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="buy-btn">Tambah Keranjang</button>
-                            </form>
-                        @else
-                            <a href="{{ route('product.detail', $product) }}" class="buy-btn">Lihat Detail</a>
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="buy-btn">Tambah Keranjang</a>
-                    @endauth
+        <div class="contact-container">
+
+            <div class="contact-row">
+
+                <div class="contact-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>Alamat</h3>
+                    <p>
+                        Jl. H. Hasan No.12 RT.31/RW.9,
+                        Baru, Kec. Ps. Rebo,
+                        Kota Jakarta Timur,
+                        DKI Jakarta 13780
+                    </p>
                 </div>
-            @empty
-                <div class="text-center text-muted py-4">Tidak ada produk rekomendasi untuk saat ini.</div>
-            @endforelse
-        </div>
-    </div>
 
-    {{-- ======================================================
-         LIQUID VAPE
-    ====================================================== --}}
-    <div class="section-wrap">
-        <div class="section-header">
-            <h2>Liquid Vape</h2>
-            <p>Aneka pilihan rasa liquid vape freebase, saltnic dan pods friendly.</p>
-        </div>
-
-        <div class="product-grid">
-            @forelse ($liquidProducts as $product)
-                <div class="prod-card">
-                    <a href="{{ route('product.detail', $product) }}" class="card-link">
-                        <img class="prod-img"
-                            src="{{ $product->image ? Storage::url($product->image) : asset('images/no-image.png') }}"
-                            alt="{{ $product->name }}">
-                        <span class="prod-cat">{{ $product->category->name ?? 'Liquid' }}</span>
-                        <div class="prod-name">{{ $product->name }}</div>
-                        <div class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                    </a>
-                    @auth
-                        @if (auth()->user()->isPelanggan())
-                            <form action="{{ route('pelanggan.cart.add', $product) }}" method="POST"
-                                class="ajax-cart-form">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="buy-btn">Tambah Keranjang</button>
-                            </form>
-                        @else
-                            <a href="{{ route('product.detail', $product) }}" class="buy-btn">Lihat Detail</a>
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="buy-btn">Tambah Keranjang</a>
-                    @endauth
+                <div class="contact-card">
+                    <i class="fa-solid fa-phone"></i>
+                    <h3>Telepon / WhatsApp</h3>
+                    <p>0877-4311-4125</p>
                 </div>
-            @empty
-                <div class="text-center text-muted py-4">Tidak ada produk liquid tersedia saat ini.</div>
-            @endforelse
-        </div>
-    </div>
 
-    {{-- ======================================================
-         MOD
-    ====================================================== --}}
-    <div class="section-wrap">
-        <div class="section-header">
-            <h2>MOD</h2>
-            <p>Koleksi mod terbaik dari berbagai brand ternama.</p>
-        </div>
-
-        <div class="product-grid">
-            @forelse ($modProducts as $product)
-                <div class="prod-card">
-                    <a href="{{ route('product.detail', $product) }}" class="card-link">
-                        <img class="prod-img"
-                            src="{{ $product->image ? Storage::url($product->image) : asset('images/no-image.png') }}"
-                            alt="{{ $product->name }}">
-                        <span class="prod-cat">{{ $product->category->name ?? 'MOD' }}</span>
-                        <div class="prod-name">{{ $product->name }}</div>
-                        <div class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                    </a>
-                    @auth
-                        @if (auth()->user()->isPelanggan())
-                            <form action="{{ route('pelanggan.cart.add', $product) }}" method="POST"
-                                class="ajax-cart-form">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="buy-btn">Tambah Keranjang</button>
-                            </form>
-                        @else
-                            <a href="{{ route('product.detail', $product) }}" class="buy-btn">Lihat Detail</a>
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="buy-btn">Tambah Keranjang</a>
-                    @endauth
+                <div class="contact-card">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>twinsvapor.shop@gmail.com</p>
                 </div>
-            @empty
-                <div class="text-center text-muted py-4">Tidak ada produk MOD tersedia saat ini.</div>
-            @endforelse
-        </div>
-    </div>
 
-    {{-- ======================================================
-         NEW ARRIVALS BANNER
-    ====================================================== --}}
-    <div class="new-arrival-section">
-        <h2 class="new-arrival-title">New Arrivals</h2>
-        <div class="new-arrival-banner">
-            <img src="{{ asset('images/new-arrival.png') }}" alt="New Arrivals">
-        </div>
-    </div>
+            </div>
 
-    {{-- ======================================================
-         POD
-    ====================================================== --}}
-    <div class="section-wrap">
-        <div class="section-header">
-            <h2>POD</h2>
-            <p>Pod system terkini untuk pengalaman vaping yang nyaman.</p>
-        </div>
-
-        <div class="product-grid">
-            @forelse ($podProducts as $product)
-                <div class="prod-card">
-                    <a href="{{ route('product.detail', $product) }}" class="card-link">
-                        <img class="prod-img"
-                            src="{{ $product->image ? Storage::url($product->image) : asset('images/no-image.png') }}"
-                            alt="{{ $product->name }}">
-                        <span class="prod-cat">{{ $product->category->name ?? 'POD' }}</span>
-                        <div class="prod-name">{{ $product->name }}</div>
-                        <div class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                    </a>
-                    @auth
-                        @if (auth()->user()->isPelanggan())
-                            <form action="{{ route('pelanggan.cart.add', $product) }}" method="POST"
-                                class="ajax-cart-form">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="buy-btn">Tambah Keranjang</button>
-                            </form>
-                        @else
-                            <a href="{{ route('product.detail', $product) }}" class="buy-btn">Lihat Detail</a>
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="buy-btn">Tambah Keranjang</a>
-                    @endauth
+            <div class="contact-row center-row">
+                <div class="contact-card">
+                    <i class="fa-brands fa-instagram"></i>
+                    <h3>Instagram</h3>
+                    <p>@twins.vaporshop</p>
                 </div>
-            @empty
-                <div class="text-center text-muted py-4">Tidak ada produk POD tersedia saat ini.</div>
-            @endforelse
-        </div>
-    </div>
 
-    {{-- ======================================================
-         AIO (ALL IN ONE)
-    ====================================================== --}}
-    <div class="section-wrap">
-        <div class="section-header">
-            <h2>AIO (All In One)</h2>
-            <p>Perangkat all-in-one praktis untuk pemula maupun pengguna berpengalaman.</p>
-        </div>
-
-        <div class="product-grid">
-            @forelse ($aioProducts as $product)
-                <div class="prod-card">
-                    <a href="{{ route('product.detail', $product) }}" class="card-link">
-                        <img class="prod-img"
-                            src="{{ $product->image ? Storage::url($product->image) : asset('images/no-image.png') }}"
-                            alt="{{ $product->name }}">
-                        <span class="prod-cat">AIO</span>
-                        <div class="prod-name">{{ $product->name }}</div>
-                        <div class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                    </a>
-                    @auth
-                        @if (auth()->user()->isPelanggan())
-                            <form action="{{ route('pelanggan.cart.add', $product) }}" method="POST"
-                                class="ajax-cart-form">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="buy-btn">Tambah Keranjang</button>
-                            </form>
-                        @else
-                            <a href="{{ route('product.detail', $product) }}" class="buy-btn">Lihat Detail</a>
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="buy-btn">Tambah Keranjang</a>
-                    @endauth
+                <div class="contact-card">
+                    <i class="fa-solid fa-clock"></i>
+                    <h3>Jam Operasional</h3>
+                    <p>Senin - Minggu<br>10.30 - 23.00 WIB</p>
                 </div>
-            @empty
-                <div class="text-center text-muted py-4">Tidak ada produk AIO tersedia saat ini.</div>
-            @endforelse
-        </div>
-    </div>
 
-    {{-- ======================================================
-         ACCESSORIES
-    ====================================================== --}}
-    <div class="section-wrap">
-        <div class="section-header">
-            <h2>Accessories</h2>
-            <p>Aksesoris vape lengkap: battery, charger, cotton, driptip dan lainnya.</p>
+            </div>
+            
         </div>
 
-        <div class="product-grid">
-            @forelse ($accessoriesProducts as $product)
-                <div class="prod-card">
-                    <a href="{{ route('product.detail', $product) }}" class="card-link">
-                        <img class="prod-img"
-                            src="{{ $product->image ? Storage::url($product->image) : asset('images/no-image.png') }}"
-                            alt="{{ $product->name }}">
-                        <span class="prod-cat">{{ $product->category->name ?? 'Accessories' }}</span>
-                        <div class="prod-name">{{ $product->name }}</div>
-                        <div class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                    </a>
-                    @auth
-                        @if (auth()->user()->isPelanggan())
-                            <form action="{{ route('pelanggan.cart.add', $product) }}" method="POST"
-                                class="ajax-cart-form">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="buy-btn">Tambah Keranjang</button>
-                            </form>
-                        @else
-                            <a href="{{ route('product.detail', $product) }}" class="buy-btn">Lihat Detail</a>
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="buy-btn">Tambah Keranjang</a>
-                    @endauth
-                </div>
-            @empty
-                <div class="text-center text-muted py-4">Tidak ada produk accessories tersedia saat ini.</div>
-            @endforelse
-        </div>
-    </div>
-
-    {{-- ======================================================
-         ATOMIZERS
-    ====================================================== --}}
-    <div class="section-wrap">
-        <div class="section-header">
-            <h2>Atomizers</h2>
-            <p>Koleksi RDA, RTA, RDTA dan RBA dari brand terpercaya.</p>
-        </div>
-
-        <div class="product-grid">
-            @forelse ($atomizerProducts as $product)
-                <div class="prod-card">
-                    <a href="{{ route('product.detail', $product) }}" class="card-link">
-                        <img class="prod-img"
-                            src="{{ $product->image ? Storage::url($product->image) : asset('images/no-image.png') }}"
-                            alt="{{ $product->name }}">
-                        <span class="prod-cat">{{ $product->category->name ?? 'Atomizers' }}</span>
-                        <div class="prod-name">{{ $product->name }}</div>
-                        <div class="prod-price">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                    </a>
-                    @auth
-                        @if (auth()->user()->isPelanggan())
-                            <form action="{{ route('pelanggan.cart.add', $product) }}" method="POST"
-                                class="ajax-cart-form">
-                                @csrf
-                                <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="buy-btn">Tambah Keranjang</button>
-                            </form>
-                        @else
-                            <a href="{{ route('product.detail', $product) }}" class="buy-btn">Lihat Detail</a>
-                        @endif
-                    @else
-                        <a href="{{ route('login') }}" class="buy-btn">Tambah Keranjang</a>
-                    @endauth
-                </div>
-            @empty
-                <div class="text-center text-muted py-4">Tidak ada produk atomizer tersedia saat ini.</div>
-            @endforelse
-        </div>
-    </div>
+    </section>
 
     {{-- ======================================================
          FOOTER
@@ -1269,7 +1120,12 @@
                 <a href="{{ route('home') }}">Beranda</a>
                 <a href="{{ route('catalog') }}">Kategori Produk</a>
                 <a href="{{ route('spk') }}">Rekomendasi</a>
-                <a href="{{ route('kontak') }}">Kontak Kami</a>
+                <li><a href="{{ route('spk') }}">Rekomendasi</a></li>
+                <li>
+                    <a href="{{ route('kontak') }}">
+                        Kontak Kami
+                    </a>
+                </li>
             </div>
 
             {{-- SOCIAL --}}

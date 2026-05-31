@@ -72,3 +72,7 @@ Route::prefix('pelanggan')->name('pelanggan.')->middleware(['auth', 'pelanggan']
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
+
+// ── Kontak Kami ─────────────────────────────────────────────────────────────
+Route::get('/kontak', function () {return view('home.kontak'); })
+->name('kontak');

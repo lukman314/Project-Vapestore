@@ -1,4 +1,4 @@
-{{-- resources/views/home/kontak.blade.php --}}
+{{-- resources/views/home/index.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 
@@ -18,8 +18,6 @@
     {{-- ICONS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
 
     <style>
         /* =============================================
@@ -377,6 +375,95 @@
         }
 
         /* =============================================
+           HERO SLIDER
+        ============================================= */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 650px;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: heroFade 15s infinite;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-slide:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .hero-slide:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .hero-slide:nth-child(3) {
+            animation-delay: 10s;
+        }
+
+        @keyframes heroFade {
+            0% {
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            35% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* =============================================
+           PROMO BANNERS
+        ============================================= */
+        .promo-section {
+            width: 100%;
+            max-width: 1500px;
+            margin: 20px auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .promo-section a {
+            display: block;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .promo-section img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .promo-section a:hover img {
+            transform: scale(1.02);
+        }
+
+        /* =============================================
            SECTION HEADER
         ============================================= */
         .section-wrap {
@@ -404,6 +491,132 @@
             font-size: 11px;
             color: #888;
             margin-top: 2px;
+        }
+
+        /* =============================================
+           PRODUCT GRID
+        ============================================= */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        /* PRODUCT CARD */
+        .prod-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.25s, transform 0.25s;
+        }
+
+        .prod-card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10);
+            transform: translateY(-4px);
+        }
+
+        .prod-card a.card-link {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            color: #111;
+        }
+
+        .prod-card .prod-img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #fafafa;
+            margin-bottom: 12px;
+        }
+
+        .prod-card .prod-cat {
+            font-size: 10px;
+            color: #fff;
+            background: #111;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+            align-self: flex-start;
+        }
+
+        .prod-card .prod-name {
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.45;
+            color: #111;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .prod-card .prod-price {
+            font-size: 14px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .prod-card .buy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 36px;
+            background: #111;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .prod-card .buy-btn:hover {
+            background: #333;
+        }
+
+        /* =============================================
+           NEW ARRIVAL BANNER
+        ============================================= */
+        .new-arrival-section {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto 10px;
+            padding: 0 30px 20px;
+        }
+
+        .new-arrival-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #111;
+            margin-bottom: 18px;
+        }
+
+        .new-arrival-banner {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .new-arrival-banner img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
         }
 
         /* =============================================
@@ -651,36 +864,6 @@
             justify-content: center;
         }
 
-        /* Alamat */
-        .contact-card .fa-location-dot {
-            color: #EF4444;
-            /* Merah */
-        }
-
-        /* Telepon / WhatsApp */
-        .contact-card .fa-phone {
-            color: #00ac3f;
-            /* Hijau WhatsApp */
-        }
-
-        /* Email */
-        .contact-card .fa-envelope {
-            color: #3B82F6;
-            /* Biru */
-        }
-
-        /* Instagram */
-        .contact-card .fa-instagram {
-            color: #ff00b3;
-            /* Pink Instagram */
-        }
-
-        /* Jam Operasional */
-        .contact-card .fa-clock {
-            color: #F59E0B;
-            /* Kuning Orange */
-        }
-
         /* Responsive */
 
         @media (max-width: 992px) {
@@ -860,222 +1043,149 @@
         </div>
     </nav>
 
-    <section class="contact-page">
+<section class="contact-page">
 
-        <div class="contact-header">
-            <h1>Kontak Kami</h1>
+    <div class="contact-header">
+        <h1>Kontak Kami</h1>
 
-            <p>
-                Kami siap membantu Anda jika memiliki pertanyaan,
-                membutuhkan rekomendasi produk, atau ingin mengetahui
-                informasi lebih lanjut.
-            </p>
-        </div>
+        <p>
+            Kami siap membantu Anda jika memiliki pertanyaan,
+            membutuhkan rekomendasi produk, atau ingin mengetahui
+            informasi lebih lanjut.
+        </p>
+    </div>
 
-        <div class="contact-container">
+    <div class="contact-container">
 
-            <div class="contact-row">
+        <div class="contact-row">
 
-                <div class="contact-card">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <h3>Alamat</h3>
-                    <p>
-                        Jl. H. Hasan No.12 RT.31/RW.9,
-                        Baru, Kec. Ps. Rebo,
-                        Kota Jakarta Timur,
-                        DKI Jakarta 13780
-                    </p>
-                </div>
-
-                <div class="contact-card">
-                    <i class="fa-solid fa-phone"></i>
-                    <h3>Telepon / WhatsApp</h3>
-                    <p>0877-4311-4125</p>
-                </div>
-
-                <div class="contact-card">
-                    <i class="fa-solid fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p>twinsvapor.shop@gmail.com</p>
-                </div>
-
-            </div>
-
-            <div class="contact-row center-row">
-                <div class="contact-card">
-                    <i class="fa-brands fa-instagram"></i>
-                    <h3>Instagram</h3>
-                    <p>@twins.vaporshop</p>
-                </div>
-
-                <div class="contact-card">
-                    <i class="fa-solid fa-clock"></i>
-                    <h3>Jam Operasional</h3>
-                    <p>Senin - Minggu<br>10.30 - 23.00 WIB</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    {{-- ======================================================
-         FOOTER
-    ====================================================== --}}
-    <footer class="footer" id="footer">
-        <div class="footer-inner">
-
-            {{-- LOGO --}}
-            <div class="footer-logo">
-                <img src="{{ asset('images/Logo.png') }}" alt="Twins Vapor">
-            </div>
-
-            {{-- MENU --}}
-            <div class="footer-col">
-                <h4>Menu</h4>
-                <a href="{{ route('home') }}">Beranda</a>
-                <a href="{{ route('catalog') }}">Kategori Produk</a>
-                <a href="{{ route('spk') }}">Rekomendasi</a>
-                <li><a href="{{ route('spk') }}">Rekomendasi</a></li>
-                <li>
-                    <a href="{{ route('kontak') }}">
-                        Kontak Kami
-                    </a>
-                </li>
-            </div>
-
-            {{-- SOCIAL --}}
-            <div class="footer-col">
-                <h4>Sosial Media</h4>
-                <div class="footer-social-row">
-                    <i class="bi bi-instagram"></i>
-                    <span>twins.vaporshop</span>
-                </div>
-                <h4 style="margin-top:12px">Marketplace</h4>
-                <div class="footer-social-row">
-                    <img src="{{ asset('images/tokopedia.png') }}" class="market-icon" alt="Tokopedia">
-                    <span>twins.vaporshop</span>
-                </div>
-                <h4 style="margin-top:12px">WhatsApp</h4>
-                <div class="footer-social-row">
-                    <i class="fab fa-whatsapp" style="color:#25D366"></i>
-                    <span>0857-1431-4125</span>
-                </div>
-            </div>
-
-            {{-- ADDRESS --}}
-            <div class="footer-col footer-addr">
-                <h4>Alamat</h4>
-                <p class="alamat-wrap">
-                    <i class="fa-solid fa-location-dot"></i>
-                    Jl. H. Hasan No.12, RT.13/RW.8,Baru, Kec. Ps. Rebo,Kota Jakarta Timur,
+            <div class="contact-card">
+                <i class="fa-solid fa-location-dot"></i>
+                <h3>Alamat</h3>
+                <p>
+                    Jl. H. Hasan No.12 RT.31/RW.9,
+                    Baru, Kec. Ps. Rebo,
+                    Kota Jakarta Timur,
                     DKI Jakarta 13780
                 </p>
-                <h4 style="margin-bottom:10px">Maps</h4>
-                <iframe
-                    src="https://www.google.com/maps?q=Jl.%20H.%20Hasan%20No.12%20Pasar%20Rebo%20Jakarta&output=embed"
-                    allowfullscreen loading="lazy">
-                </iframe>
-                <a href="https://maps.google.com/?q=Jl.H.Hasan+No.12+Pasar+Rebo+Jakarta" target="_blank"
-                    class="maps-link">
-                    Lihat Lokasi di Google Maps
-                </a>
+            </div>
+
+            <div class="contact-card">
+                <i class="fa-solid fa-phone"></i>
+                <h3>Telepon / WhatsApp</h3>
+                <p>0877-4311-4125</p>
+            </div>
+
+            <div class="contact-card">
+                <i class="fa-solid fa-envelope"></i>
+                <h3>Email</h3>
+                <p>twinsvapor.shop@gmail.com</p>
             </div>
 
         </div>
 
-        <div class="footer-bottom">
-            &copy; {{ date('Y') }} Twins Vapor. All rights reserved.
+        <div class="contact-row center-row">
+
+            <div class="contact-card">
+                <i class="fa-brands fa-instagram"></i>
+                <h3>Instagram</h3>
+                <p>@twins.vaporshop</p>
+            </div>
+
+            <div class="contact-card">
+                <i class="fa-solid fa-clock"></i>
+                <h3>Jam Operasional</h3>
+                <p>Senin - Minggu<br>10.30 - 23.00 WIB</p>
+            </div>
+
+            </div>
+            
         </div>
-    </footer>
 
-    {{-- AJAX add-to-cart handler for standalone home page --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cartBadge = document.getElementById('cart-badge');
-            const alertContainer = document.createElement('div');
-            alertContainer.style.position = 'fixed';
-            alertContainer.style.top = '1rem';
-            alertContainer.style.right = '1rem';
-            alertContainer.style.zIndex = '1050';
-            document.body.appendChild(alertContainer);
+</section>
+@endsection
+@push('styles')
+<style>
 
-            document.querySelectorAll('form.ajax-cart-form').forEach(function(form) {
-                form.addEventListener('submit', async function(event) {
-                    event.preventDefault();
+/* CONTACT PAGE */
 
-                    const submitButton = form.querySelector(
-                        'button[type="submit"], input[type="submit"]');
-                    const originalText = submitButton ? submitButton.innerHTML : null;
-                    if (submitButton) {
-                        submitButton.disabled = true;
-                        submitButton.innerHTML = 'Menambahkan...';
-                    }
+.contact-page{
+    padding:40px 30px 80px;
+    background:#fff;
+}
 
-                    const formData = new FormData(form);
-                    let response, data = {};
-                    try {
-                        response = await fetch(form.action, {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector(
-                                    'meta[name="csrf-token"]').content,
-                                'Accept': 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest'
-                            },
-                            credentials: 'same-origin',
-                            body: formData,
-                        });
+.contact-header{
+    text-align:center;
+    margin-bottom:50px;
+}
 
-                        data = await response.json().catch(() => ({}));
-                        console.debug('Add-to-cart response', response.status, data);
-                    } catch (err) {
-                        console.error('AJAX add-to-cart failed', err);
-                        showMessage('Gagal terhubung ke server.', 'danger');
-                        if (submitButton) {
-                            submitButton.disabled = false;
-                            submitButton.innerHTML = originalText;
-                        }
-                        return;
-                    }
+.contact-header h1{
+    font-size:58px;
+    font-weight:800;
+    color:#111;
+}
 
-                    const showMessage = function(message, type) {
-                        const alertBox = document.createElement('div');
-                        alertBox.className = 'alert alert-' + type +
-                            ' alert-dismissible fade show';
-                        alertBox.role = 'alert';
-                        alertBox.innerHTML = message +
-                            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-                        alertContainer.appendChild(alertBox);
-                        setTimeout(function() {
-                            alertBox.classList.remove('show');
-                        }, 4000);
-                    };
+.contact-header p{
+    max-width:750px;
+    margin:auto;
+    color:#666;
+}
 
-                    if (response.ok && data.success) {
-                        if (cartBadge && typeof data.cart_count !== 'undefined') {
-                            cartBadge.textContent = data.cart_count;
-                            cartBadge.style.display = 'flex';
-                        }
-                        showMessage(data.message || 'Produk berhasil ditambahkan ke keranjang.',
-                            'success');
-                    } else {
-                        showMessage(data.message || 'Gagal menambahkan produk ke keranjang.',
-                            'danger');
-                    }
+.contact-container{
+    max-width:1400px;
+    margin:auto;
+}
 
-                    if (submitButton) {
-                        submitButton.disabled = false;
-                        if (originalText !== null) {
-                            submitButton.innerHTML = originalText;
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+.contact-row{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
 
-</body>
+.contact-card{
+    width:380px;
+    min-height:260px;
+    background:#fff;
+    border:1px solid #ececec;
+    border-radius:18px;
+    padding:40px 30px;
+    text-align:center;
+    transition:.3s;
+}
 
-</html>
+.contact-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.contact-card i{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.contact-card h3{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.contact-card p{
+    color:#666;
+    line-height:1.8;
+}
+
+@media(max-width:768px){
+
+    .contact-header h1{
+        font-size:40px;
+    }
+
+    .contact-card{
+        width:100%;
+    }
+
+}
+</style>
+@endpush

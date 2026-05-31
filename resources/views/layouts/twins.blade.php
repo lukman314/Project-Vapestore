@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,9 +18,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
-    
     <style>
+        *,
+        *::before,
+        *::after{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Poppins',sans-serif;
+            background:#fff;
+            color:#111;
+            overflow-x:hidden;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        ul{
+            list-style:none;
+        }
+
+        img{
+            display:block;
+            max-width:100%;
+        }
         /* =============================================
            NAVBAR
         ============================================= */
@@ -119,24 +144,13 @@
         }
 
         .nav-menu {
-            display: flex;
-            width: 100%;
-            /* Otomatis meratakan teks 'Beranda' dan 'Kontak Kami' sejajar
-               dengan ujung kiri-kanan Search bar */
-            justify-content: space-between;
-            align-items: center;
-            /* Pastikan TIDAK ADA properti "gap" di sini agar rata presisi */
-        }
-
-        /* ====================================
-           4. LAYAR LEBAR
-        ==================================== */
-        @media (min-width: 1400px) {
-            .nav-search {
-                width: 600px;
-            }
-
-            /* Karena menu pakai space-between, ia otomatis akan menyesuaikan selebar 600px */
+             display:flex;
+            width:100%;
+            justify-content:space-between;
+            align-items:center;
+            list-style:none;
+            margin:0;
+            padding:0;
         }
 
         .nav-menu li {
@@ -172,6 +186,10 @@
             z-index: 9999;
         }
 
+        .navbar .dropdown-menu{
+        display:block !important;
+    }
+
         .has-dropdown:hover>.dropdown-menu {
             opacity: 1;
             visibility: visible;
@@ -206,7 +224,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             min-width: 160px;
             padding: 6px 0;
-            display: none;
+            display: none;            
             z-index: 9999;
         }
 
@@ -385,9 +403,8 @@
         }
 
         .alamat-wrap i {
-            margin-top: 4px;
-            color: #ff4d4d;
-            /* Warna diubah menjadi merah */
+            margin-top: 4px; 
+            color: #ff4d4d; /* Warna diubah menjadi merah */
             font-size: 16px;
         }
 
@@ -464,14 +481,10 @@
             font-size: 12px;
         }
     </style>
-    @stack('styles')
+@stack('styles')
 </head>
-
 <body>
-    {{-- ======================================================
-         NAVBAR
-    ====================================================== --}}
-    <nav class="navbar">
+ <nav class="navbar">
         <div class="navbar-inner">
 
             {{-- LOGO --}}
@@ -542,11 +555,7 @@
                     </li>
 
                     <li><a href="{{ route('spk') }}">Rekomendasi</a></li>
-                    <li>
-                        <a href="{{ route('kontak') }}">
-                            Kontak Kami
-                        </a>
-                    </li>
+                    <li><a href="{{ route('kontak') }}">Kontak Kami</a></li>
                 </ul>
             </div>
 
@@ -557,8 +566,7 @@
                         <a href="{{ route('pelanggan.cart') }}" style="position:relative">
                             <i class="fa-solid fa-cart-shopping"></i>
                             @php $cartCount = auth()->user()->carts()->count(); @endphp
-                            <span id="cart-badge" class="cart-badge"
-                                style="{{ $cartCount ? '' : 'display:none;' }}">{{ $cartCount }}</span>
+                            <span id="cart-badge" class="cart-badge" style="{{ $cartCount ? '' : 'display:none;' }}">{{ $cartCount }}</span>
                         </a>
                     @else
                         <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
@@ -610,9 +618,9 @@
     </nav>
 
     <main>
-        @yield('content')
-    </main>
-    <footer class="footer" id="footer">
+    @yield('content')
+</main>
+<footer class="footer" id="footer">
         <div class="footer-inner">
 
             {{-- LOGO --}}
@@ -675,5 +683,4 @@
     </footer>
     @stack('scripts')
 </body>
-
 </html>

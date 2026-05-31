@@ -204,4 +204,4 @@
     </script>
     @stack('scripts')
 </body>
-</html>
+</html> 

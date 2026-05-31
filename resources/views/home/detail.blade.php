@@ -91,7 +91,107 @@
             @endif
         </div>
     </div>
+{{-- DESKRIPSI & SPESIFIKASI --}}
+<div class="product-info-section mt-5">
 
+    <div class="info-tabs">
+        <button class="tab-btn active" onclick="showTab('desc')">
+            Deskripsi
+        </button>
+
+        <button class="tab-btn" onclick="showTab('spec')">
+            Spesifikasi
+        </button>
+    </div>
+
+    {{-- DESKRIPSI --}}
+    <div id="desc" class="tab-content active">
+
+        <h3>Deskripsi</h3>
+
+        <p>
+            Hexohm V3 Anodize adalah salah satu device mod premium yang dikenal
+            dengan performa tinggi, desain kokoh, dan kualitas build yang sangat solid.
+            Dibuat oleh Craving Vapor, mod ini menghadirkan kombinasi antara kekuatan,
+            kesederhanaan, dan daya tahan dalam satu perangkat yang elegan.
+        </p>
+
+        <p>
+            Mengusung material billet aluminum anodized, Hexohm V3 memiliki tampilan
+            mewah dengan finishing halus sekaligus tahan lama. Perangkat ini menggunakan
+            sistem potentiometer (knob putar) untuk mengatur output voltage secara manual,
+            memberikan kontrol penuh terhadap pengalaman vaping.
+        </p>
+
+        <p>
+            Didukung chipset proprietary dengan kemampuan hingga 180W dan 30A,
+            Hexohm V3 mampu menghasilkan tenaga besar yang stabil untuk berbagai
+            kebutuhan vaping.
+        </p>
+
+        <br>
+
+        <strong>Isi Paket (In The Box)</strong>
+
+        <ul>
+            <li>1x Hexohm V3 Anodize Mod</li>
+            <li>1x Kartu autentikasi / serial number</li>
+            <li>1x Kartu garansi</li>
+            <li>1x Sticker Craving Vapor</li>
+        </ul>
+
+    </div>
+
+    {{-- SPESIFIKASI --}}
+    <div id="spec" class="tab-content">
+
+        <h3>Spesifikasi</h3>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <h5>Spesifikasi Hexohm V3</h5>
+
+                <ul>
+                    <li>Tipe Device: Box Mod</li>
+                    <li>Material: Anodized Aluminum</li>
+                    <li>Chipset: HEX-T/30-C Board</li>
+                    <li>Output Power: 180 Watt</li>
+                    <li>Voltage Range: 3.3V – 6.0V</li>
+                    <li>Max Current: 30A</li>
+                </ul>
+
+                <h5>Baterai</h5>
+
+                <ul>
+                    <li>Dual 18650</li>
+                    <li>Battery Door Magnetized</li>
+                    <li>Solid Brass Contact</li>
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <h5>Fitur Utama</h5>
+
+                <ul>
+                    <li>Potentiometer Voltage Control</li>
+                    <li>Master On / Off Switch</li>
+                    <li>Magnetized Battery Door</li>
+                    <li>Spring Loaded 510 Connector</li>
+                    <li>Oversized Firing Button</li>
+                </ul>
+
+                <h5>Fitur Keamanan</h5>
+
+                <ul>
+                    <li>Low Voltage Cut-Off</li>
+                    <li>Reverse Polarity Protection</li>
+                    <li>10 Second Cut-Off Timer</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
     {{-- Related Products --}}
     @if($related->isNotEmpty())
     <div class="mt-5">
@@ -123,7 +223,82 @@
 
 @push('styles')
 <style>
-    .btn-vs { background:#ff6b35;border-color:#ff6b35;color:#fff; }
-    .btn-vs:hover { background:#e55a25;color:#fff; }
+
+.btn-vs{
+    background:#000;
+    border-color:#000;
+    color:#fff;
+}
+
+.btn-vs:hover{
+    background:#222;
+    color:#fff;
+}
+
+/* TAB SECTION */
+
+.product-info-section{
+    margin-top:50px;
+}
+
+.info-tabs{
+    display:flex;
+}
+
+.tab-btn{
+    width:50%;
+    border:1px solid #000;
+    background:#fff;
+    font-size:2rem;
+    font-weight:700;
+    padding:14px;
+}
+
+.tab-btn.active{
+    background:#000;
+    color:#fff;
+}
+
+.tab-content{
+    display:none;
+    border:1px solid #000;
+    border-top:none;
+    padding:30px;
+    background:#fff;
+}
+
+.tab-content.active{
+    display:block;
+}
+
+.tab-content h3{
+    text-align:center;
+    font-weight:700;
+    margin-bottom:25px;
+}
+
+.tab-content ul{
+    padding-left:20px;
+}
+
+.tab-content li{
+    margin-bottom:6px;
+}
 </style>
 @endpush
+@push('scripts')
+<script>
+function showTab(tabId){
+
+    document.querySelectorAll('.tab-content')
+        .forEach(el => el.classList.remove('active'));
+
+    document.querySelectorAll('.tab-btn')
+        .forEach(el => el.classList.remove('active'));
+
+    document.getElementById(tabId)
+        .classList.add('active');
+
+    event.target.classList.add('active');
+}
+</script>

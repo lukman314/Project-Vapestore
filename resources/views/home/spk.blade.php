@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.twins')
 
 @section('title', 'Rekomendasi SPK - SAW')
 

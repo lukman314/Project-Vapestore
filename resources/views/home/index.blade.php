@@ -241,7 +241,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             min-width: 160px;
             padding: 6px 0;
-            display: none;
+            display: none;            
             z-index: 9999;
         }
 

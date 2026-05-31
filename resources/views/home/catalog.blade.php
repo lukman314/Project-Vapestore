@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.twins')
 
 @section('title', 'Katalog Produk')
 
@@ -55,9 +55,9 @@
             {{-- ===== REKOMENDASI SECTION ===== --}}
             <div class="mb-4">
                 <div class="d-flex align-items-center gap-2 mb-3">
-                    <span class="fw-bold fs-6">
+                    <h2 class="fw-bold text-uppercase mb-0">
                         <i class="bi bi-stars" style="color:#ff6b35"></i> Rekomendasi Untuk Anda
-                    </span>
+                    </
                     <span class="badge rounded-pill text-bg-warning" style="font-size:.7rem">
                         <i class="bi bi-lightning-charge-fill"></i> Berdasarkan Rating &amp; Popularitas
                     </span>
@@ -106,7 +106,7 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <div>
-                    <h5 class="fw-bold mb-0">Katalog Produk</h5>
+                    <h5 class="fw-bold text-uppercase mb-0">Katalog Produk</h5>
                     <small class="text-muted">{{ $products->total() }} produk ditemukan</small>
                 </div>
                 <form action="{{ route('catalog') }}" method="GET" class="d-flex gap-2">
@@ -153,7 +153,7 @@
                                     <i class="bi bi-star-fill"></i>
                                     <span class="text-muted ms-1">{{ $product->rating }} · {{ number_format($product->purchase_count) }}x terjual</span>
                                 </div>
-                                <div class="fw-bold mt-auto mb-2" style="color:#ff6b35">{{ $product->formatted_price }}</div>
+                                <div class="fw-bold mt-auto mb-2 text-dark">{{ $product->formatted_price }}</div>
                                 @auth
                                     @if(auth()->user()->isPelanggan())
                                         <form action="{{ route('pelanggan.cart.add', $product) }}" method="POST" class="ajax-cart-form">
@@ -188,8 +188,8 @@
 
 @push('styles')
 <style>
-    .btn-vs { background:#ff6b35;border-color:#ff6b35;color:#fff; }
-    .btn-vs:hover { background:#e55a25;color:#fff; }
+    .btn-vs {  background:#111; border-color:#111; }
+    .btn-vs:hover { background:#222; border-color:#222; }
     .product-card { transition:.2s;border:1px solid #eee; }
     .product-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-3px); }
 </style>

@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
-            --vs-primary: #ff6b35;
-            --vs-dark: #1a1a2e;
-            --vs-secondary: #16213e;
+            --vs-primary: #111111;
+            --vs-dark: #111111;
         }
         body { background: #f8f9fa; }
         .navbar-brand span { color: var(--vs-primary); }
@@ -24,10 +23,12 @@
     @stack('styles')
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background:var(--vs-dark)">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="{{ route('home') }}">
-                <i class="bi bi-cloud-fog2-fill"></i> Vape<span>Store</span>
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('images/Logo.png') }}"
+                    style="height:65px"
+                    alt="Twins Vapor">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
                 <span class="navbar-toggler-icon"></span>
@@ -45,8 +46,18 @@
                             <i class="bi bi-stars"></i> Rekomendasi SPK
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">
+                            Kontak Kami
+                        </a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                <a class="nav-link">
+                    <i class="bi bi-bell"></i>
+                </a>
+            </li>
                     @guest
                         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Masuk</a></li>
                         <li class="nav-item"><a class="btn btn-vs btn-sm ms-2 rounded-pill px-3" href="{{ route('register') }}">Daftar</a></li>

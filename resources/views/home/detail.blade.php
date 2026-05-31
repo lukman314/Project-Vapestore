@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.twins')
 
 @section('title', $product->name)
 
@@ -43,7 +43,7 @@
                 </span>
             </div>
 
-            <div class="fs-2 fw-bold mb-3" style="color:#ff6b35">{{ $product->formatted_price }}</div>
+            <div class="fs-2 fw-bold mb-3 text-dark">{{ $product->formatted_price }}</div>
 
             <div class="row g-2 mb-3">
                 @if($product->liquid_type !== 'kosong')

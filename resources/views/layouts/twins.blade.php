@@ -634,7 +634,7 @@
                 <a href="{{ route('home') }}">Beranda</a>
                 <a href="{{ route('catalog') }}">Kategori Produk</a>
                 <a href="{{ route('spk') }}">Rekomendasi</a>
-                <a href="#footer">Kontak Kami</a>
+                <a href="{{route('kontak')}}">Kontak Kami</a>
             </div>
 
             {{-- SOCIAL --}}

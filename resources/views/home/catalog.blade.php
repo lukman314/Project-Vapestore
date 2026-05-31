@@ -55,20 +55,21 @@
             {{-- ===== REKOMENDASI SECTION ===== --}}
             <div class="mb-4">
                 <div class="d-flex align-items-center gap-2 mb-3">
-                    <h2 class="fw-bold text-uppercase mb-0">
+                    <h2 class="fw-bold text-uppercase mb-0 fs-3">
                         <i class="bi bi-stars" style="color:#ff6b35"></i> Rekomendasi Untuk Anda
                     </
                     <span class="badge rounded-pill text-bg-warning" style="font-size:.7rem">
                         <i class="bi bi-lightning-charge-fill"></i> Berdasarkan Rating &amp; Popularitas
                     </span>
-                    <a href="{{ route('spk') }}" class="ms-auto text-decoration-none small" style="color:#ff6b35">
-                        Rekomendasi Cerdas <i class="bi bi-arrow-right"></i>
+                    <a href="{{ route('spk') }}"
+                        class="ms-auto text-decoration-none"
+                        style="color:#ff6b35;font-size:.85rem;font-weight:600;">Rekomendasi Cerdas <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>
-                <div class="row g-3">
+                <div class="row g-4">
                     @foreach($recommended as $i => $rec)
                     <div class="col-6 col-md-3">
-                        <div class="card h-100 border-0 shadow-sm" style="border-top:3px solid #ff6b35 !important;position:relative">
+                        <div class="card h-100 border-0 shadow-sm rounded-4" style="border-top:3px solid #ff6b35 !important;position:relative">
                             {{-- Rank badge --}}
                             <div style="position:absolute;top:8px;left:8px;z-index:1">
                                 <span class="badge rounded-circle d-flex align-items-center justify-content-center fw-bold"
@@ -188,9 +189,26 @@
 
 @push('styles')
 <style>
-    .btn-vs {  background:#111; border-color:#111; }
-    .btn-vs:hover { background:#222; border-color:#222; }
+    .btn-vs {background:#111;
+    border-color:#111;
+    color:#fff !important;
+    font-weight:600; }
+    .btn-vs:hover {background:#222;
+    border-color:#222;
+    color:#fff !important; 
+}
     .product-card { transition:.2s;border:1px solid #eee; }
     .product-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-3px); }
+    
+    .pagination svg{
+    width:16px !important;
+    height:16px !important;
+}
+.pagination{
+    gap:4px;
+}
+.pagination .page-link{
+    padding:.45rem .75rem;
+}
 </style>
 @endpush

@@ -14,14 +14,18 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        /** @var \Laravel\Socialite\Two\GoogleProvider $driver */
+        $driver = Socialite::driver('google');
+        return $driver->stateless()->redirect();
     }
 
     public function handleGoogleCallback(Request $request)
     {
         try {
             
-            $googleUser = Socialite::driver('google')->user();
+            /** @var \Laravel\Socialite\Two\GoogleProvider $driver */
+            $driver = Socialite::driver('google');
+            $googleUser = $driver->stateless()->user();
             
             // 1. Cari atau buat user berdasarkan email agar datanya sinkron
             $user = User::where('email', $googleUser->email)->first();

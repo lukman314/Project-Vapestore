@@ -22,6 +22,7 @@ class GoogleController extends Controller
         try {
             
             $googleUser = Socialite::driver('google')->user();
+            dd($googleUser);
             
             // 1. Cari atau buat user berdasarkan email agar datanya sinkron
             $user = User::where('email', $googleUser->email)->first();

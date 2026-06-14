@@ -59,10 +59,8 @@ class GoogleController extends Controller
             // 1. Aktifkan regenerate untuk keamanan (hindari session fixation)
             $request->session()->regenerate();
             
-            // 2. HAPUS atau comment kode session()->save(); karena ini yang bikin error
-            // session()->save();
-            
-            // 3. Tembak pesan suksesnya secara paksa langsung ke session sebelum dialihkan
+            // 2. Simpan session secara manual untuk memastikan data tertulis sebelum redirect di lingkungan cloud
+            $request->session()->put('success', $pesanSukses);
             session()->flash('success', $pesanSukses);
             
             return $this->redirectByRole($user); 

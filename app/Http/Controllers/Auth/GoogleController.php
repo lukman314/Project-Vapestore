@@ -54,13 +54,7 @@ class GoogleController extends Controller
             
             // 1. Aktifkan regenerate untuk keamanan (hindari session fixation)
             $request->session()->regenerate();
-            dd([
-    'auth_check' => Auth::check(),
-    'auth_id' => Auth::id(),
-    'user' => Auth::user(),
-    'session_id' => session()->getId(),
-]); 
-
+            
             // 2. HAPUS atau comment kode session()->save(); karena ini yang bikin error
             // session()->save();
             

@@ -22,7 +22,6 @@ class GoogleController extends Controller
         try {
             
             $googleUser = Socialite::driver('google')->user();
-            dd($googleUser);
             
             // 1. Cari atau buat user berdasarkan email agar datanya sinkron
             $user = User::where('email', $googleUser->email)->first();
@@ -54,7 +53,13 @@ class GoogleController extends Controller
             Auth::login($user, true); 
             
             // 1. Aktifkan regenerate untuk keamanan (hindari session fixation)
-            $request->session()->regenerate(); 
+            $request->session()->regenerate();
+            dd([
+    'auth_check' => Auth::check(),
+    'auth_id' => Auth::id(),
+    'user' => Auth::user(),
+    'session_id' => session()->getId(),
+]); 
 
             // 2. HAPUS atau comment kode session()->save(); karena ini yang bikin error
             // session()->save();

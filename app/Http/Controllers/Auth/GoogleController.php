@@ -20,7 +20,7 @@ class GoogleController extends Controller
     public function handleGoogleCallback(Request $request)
     {
         try {
-            dd('Masuk callback');
+            
             $googleUser = Socialite::driver('google')->user();
             
             // 1. Cari atau buat user berdasarkan email agar datanya sinkron

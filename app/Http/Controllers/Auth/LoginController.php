@@ -23,9 +23,25 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        // 1. Coba login dulu
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
-            return $this->redirectByRole(Auth::user());
+        
+            $user = Auth::user(); // SEKARANG $user baru ada isinya!
+
+        // 2. Baru cek statusnya di sini
+        if ($user->status == 'suspend') {
+            Auth::logout();
+            return back()->withErrors(['email' => 'Akun Anda telah dinonaktifkan oleh Admin.']);
+        }
+
+        $request->session()->regenerate();
+        
+        // --- Sisa kode sukses login ---
+            $pesanSukses = (method_exists($user, 'isAdmin') && $user->isAdmin()) 
+                        ? 'Berhasil login sebagai Admin.' 
+                        : 'Berhasil login! Selamat datang kembali, ' . $user->name . '.';
+
+            return $this->redirectByRole($user)->with('success', $pesanSukses);
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
@@ -36,7 +52,9 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('home');
+        
+        // Bonus: Kamu juga bisa kasih notif saat logout kalau mau!
+        return redirect()->route('home')->with('success', 'Anda telah berhasil logout.');
     }
 
     private function redirectByRole($user)

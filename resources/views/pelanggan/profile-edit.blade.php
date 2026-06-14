@@ -19,7 +19,7 @@
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Alamat Email</label>
                         <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}"
-                            required>
+                            readonly>
                     </div>
 
                     <div class="mb-3">

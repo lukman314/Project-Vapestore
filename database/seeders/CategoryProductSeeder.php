@@ -140,6 +140,12 @@ class CategoryProductSeeder extends Seeder
 
         $categoryMap = Category::pluck('id', 'slug');
 
+        // MAPPING FOTO PRODUK
+        $imageMap = [
+            'Lost Vape Centaurus M200 Mod' => 'images/produk/mod/FyeUNBQLVnCCq07to95u8SpEkuM8DXI89yONwpbF.jpg',
+            'Oxva Xlim Pro Kit' => 'images/produk/pod/PrwzXyFgyb5ncveuheLVcv9i6i57B57xRd6WlUYD.jpg',
+        ];
+
         // 3. PROSES INSERT ATAU UPDATE AUTOMATIS
         foreach ($products as $p) {
             Product::updateOrCreate(
@@ -153,7 +159,7 @@ class CategoryProductSeeder extends Seeder
                     'nicotine'       => $p['nicotine'],
                     'stock'          => $p['stock'],
                     'description'    => null,
-                    'image'          => null,
+                    'image'          => $imageMap[$p['name']] ?? null,
                     'is_active'      => true,
                 ]
             );

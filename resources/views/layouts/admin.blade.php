@@ -7,22 +7,33 @@
     <title>@yield('title', 'Admin') — VapeStore Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
     <style>
-        :root { --vs-primary: #ff6b35; --vs-dark: #1a1a2e; }
+        :root { --vs-primary: #ffffff; --vs-dark: #000000; }
         body { background: #f0f2f5; }
-        .sidebar { width: 260px; min-height: 100vh; background: var(--vs-dark); position: fixed; top: 0; left: 0; z-index: 100; }
-        .sidebar .brand { padding: 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,.1); }
-        .sidebar .brand span { color: var(--vs-primary); }
+        .sidebar { width: 240px; min-height: 100vh; background-color: #000000; position: fixed; top: 0; left: 0; z-index: 100; }
+        .sidebar .brand {
+            padding: 1.25rem 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .sidebar .brand span { color: white; }
+        .sidebar .brand a { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: #fff; }
+        .sidebar .brand img { height: 120px; width: auto; object-fit: contain; }
+        .sidebar .brand-label { color: #ffffff; padding: .25rem .75rem; margin-top: .75rem; display: inline-block; }
         .sidebar .nav-link { color: rgba(255,255,255,.7); padding: .6rem 1.5rem; border-radius: 0; transition: .2s; }
-        .sidebar .nav-link:hover, .sidebar .nav-link.active { color: #fff; background: rgba(255,107,53,.15); border-left: 3px solid var(--vs-primary); }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { color: #fff; background: rgba(177, 177, 177, 0.15); border-left: 3px solid var(--vs-primary); }
         .sidebar .nav-link i { width: 22px; }
         .sidebar .nav-section { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.4); padding: .75rem 1.5rem .25rem; }
-        .main-content { margin-left: 260px; }
+        .main-content { margin-left: 240px; }
         .topbar { background: #fff; border-bottom: 1px solid #dee2e6; padding: .75rem 1.5rem; }
         .card { border: none; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
-        .btn-vs { background: var(--vs-primary); border-color: var(--vs-primary); color: #fff; }
-        .btn-vs:hover { background: #e55a25; color: #fff; }
-        .text-vs { color: var(--vs-primary) !important; }
+        .btn-vs { background: #000000; border-color: #000000; color: #fff; }
+        .btn-vs:hover { background: #222222; border-color: #222222; color: #fff; }
+        .text-vs { color: #000000 !important; }
     </style>
     @stack('styles')
 </head>
@@ -30,10 +41,10 @@
     <!-- Sidebar -->
     <nav class="sidebar d-flex flex-column">
         <div class="brand">
-            <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-white fw-bold fs-5">
-                <i class="bi bi-cloud-fog2-fill"></i> Vape<span>Store</span>
+            <a href="{{ route('admin.dashboard') }}">
+                <img src="{{ asset('images/Logo.png') }}" alt="VapeStore Logo">
             </a>
-            <div class="small text-muted mt-1">Panel Admin</div>
+            <div class="small brand-label">Panel Admin</div>
         </div>
         <ul class="nav flex-column py-2">
             <li><span class="nav-section">Utama</span></li>

@@ -9,6 +9,8 @@ class SpkCriteriaSeeder extends Seeder
 {
     public function run(): void
     {
+        SpkCriteria::truncate();
+        
         $criteria = [
             ['name' => 'Harga',              'attribute' => 'price',          'type' => 'cost',    'weight' => 0.25],
             ['name' => 'Rating',             'attribute' => 'rating',         'type' => 'benefit', 'weight' => 0.4],

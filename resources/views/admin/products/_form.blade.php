@@ -47,6 +47,11 @@
         <label class="form-label fw-semibold">Deskripsi</label>
         <textarea name="description" class="form-control" rows="3">{{ old('description', $product->description ?? '') }}</textarea>
     </div>
+    <div class="col-12">
+        <label class="form-label fw-semibold">Spesifikasi</label>
+        <textarea name="specifications" class="form-control" rows="4" placeholder="Contoh format:&#10;Tipe Device: Box Mod&#10;Material: Anodized Aluminum&#10;Chipset: HEX-T/30-C Board&#10;&#10;Fitur Utama:&#10;- Potentiometer Voltage Control&#10;- Master On / Off Switch">{{ old('specifications', $product->specifications ?? '') }}</textarea>
+        <div class="form-text">Setiap baris adalah satu spesifikasi. Gunakan '-' untuk membuat bullet point di bawah heading.</div>
+    </div>
     <div class="col-md-6">
         <label class="form-label fw-semibold">Gambar Produk</label>
         <input type="file" name="image" class="form-control" accept="image/*">

@@ -36,6 +36,10 @@ class RegisterController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect()->route('home')->with('success', 'Pendaftaran berhasil! Selamat datang di TwinsVapor.');
+        
+        // Refresh session agar lebih aman dan pesan sukses terbawa sempurna
+        $request->session()->regenerate(); 
+
+        return redirect()->route('home')->with('success', 'Pendaftaran berhasil! Selamat datang di Twins Vapor, ' . $user->name . '.');
     }
 }

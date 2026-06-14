@@ -303,11 +303,14 @@
                 <p class="subtitle">Silakan Buat Akun Baru Anda</p>
 
                 {{-- GOOGLE BUTTON --}}
-                <button type="button" class="google-btn">
+                <a href="{{ route('google.login') }}" class="google-btn">
+
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
                         alt="Google" class="google-icon">
+
                     Continue with Google
-                </button>
+
+                </a>
 
                 {{-- DIVIDER --}}
                 <div class="divider">or Sign up with Email</div>

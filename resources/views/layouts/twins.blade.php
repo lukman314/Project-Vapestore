@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Twins Vapor - Vape Store Terpercaya</title>
     <meta name="description"
-        content="Twins Vapor - Toko vape terpercaya. Jual liquid, pod, mod, atomizer, accessories dan lebih.">
+        content="Twins Vapor - Toko vape terpercaya. Jual liquid, pod, mod, atomizer, dan accessories.">
 
     {{-- GOOGLE FONTS --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +18,8 @@
     {{-- ICONS --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
 
     <style>
         *,
@@ -58,8 +60,7 @@
             position: sticky;
             top: 0;
             z-index: 9999;
-            /* Padding diperkecil agar hitamnya kembali tipis seperti awal */
-            padding: 8px 0;
+            padding: 8px 0 8px;
         }
 
         .navbar-inner {
@@ -69,38 +70,35 @@
             padding: 0 30px;
 
             display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            grid-template-columns: auto 1fr auto;
             grid-template-rows: auto auto;
-            /* Jarak sangat rapat agar tidak melar ke bawah */
-            row-gap: 10px;
+            row-gap: 0;
             align-items: center;
         }
 
         .nav-logo {
             grid-column: 1;
-            /* KUNCI SAKTI: Logo mengambil 2 baris penuh secara vertikal */
             grid-row: 1 / span 2;
+            width: 120px;
+            margin-left: 20px;
             display: flex;
             align-items: center;
-            margin-left: 40px;
         }
 
         .nav-logo img {
-            width: 90px;
-            /* Tetap pakai ukuran asli 60px */
-            height: 90px;
+            width: 100%;
+            height: auto;
             object-fit: contain;
+            max-height: 70px;
         }
 
         .nav-right {
             grid-column: 3;
-            /* KUNCI SAKTI: Ikon Kanan juga mengambil 2 baris agar sejajar */
-            grid-row: 1 / span 2;
+            grid-row: 1;
             display: flex;
             align-items: center;
             gap: 16px;
             justify-content: flex-end;
-            /* Paksa mentok ke ujung kanan */
         }
 
         .search-form {
@@ -134,8 +132,9 @@
         .nav-search {
             grid-column: 2;
             grid-row: 1;
-            width: 480px;
-            /* Mengunci lebar dengan presisi */
+            width: 100%;
+            max-width: 560px;
+            justify-self: center;
         }
 
         .nav-menu-wrap {
@@ -143,11 +142,15 @@
             grid-row: 2;
             width: 100%;
             display: flex;
+            justify-content: center;
+            padding: 6px 0;
+            margin-top: 6px;
         }
 
         .nav-menu {
             display: flex;
             width: 100%;
+            max-width: 560px;
             justify-content: space-between;
             align-items: center;
             list-style: none;
@@ -483,11 +486,182 @@
             color: #555;
             font-size: 12px;
         }
+
+        /* =============================================
+           GLOBAL BANNER & SLIDER HELPERS (MOBILE READY)
+        ============================================= */
+        .hero-slider img, .promo-banner img, .banner-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        
+        /* Mencegah gambar meluap di mobile */
+        .img-fluid-mobile {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Responsive breakpoints */
+        @media (max-width: 1200px) {
+            .navbar-inner {
+                padding: 0 20px;
+            }
+
+            .nav-logo {
+                width: 120px;
+                margin-left: 15px;
+            }
+
+            .nav-logo img {
+                width: 100%;
+                height: auto;
+            }
+
+            .nav-search {
+                max-width: 480px;
+            }
+
+            .nav-menu {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navbar-inner {
+                padding: 0 16px;
+            }
+
+            .nav-logo {
+                width: 100px;
+                margin-left: 10px;
+            }
+
+            .nav-logo img {
+                width: 100%;
+                height: auto;
+            }
+
+            .search-form {
+                height: 36px;
+            }
+
+            .nav-search {
+                max-width: 380px;
+            }
+
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .nav-menu>li>a {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 0 0;
+            }
+            .navbar-inner {
+                grid-template-columns: auto 1fr auto;
+                grid-template-rows: auto auto auto;
+                padding: 0 16px;
+                column-gap: 10px;
+            }
+
+            .nav-logo {
+                grid-column: 1;
+                grid-row: 1;
+                width: 90px;
+                margin-left: 0;
+            }
+
+            .nav-right {
+                grid-column: 3;
+                grid-row: 1;
+                gap: 12px;
+            }
+
+            .nav-search {
+                grid-column: 1 / -1;
+                grid-row: 2;
+                padding: 12px 0 6px;
+            }
+
+            .search-form {
+                height: 40px;
+                background: #fdfdfd;
+                border: 1px solid #ddd;
+            }
+
+            .nav-menu-wrap {
+                grid-column: 1 / -1;
+                grid-row: 3;
+                margin: 0 -16px; /* Menarik container ke tepi layar hp */
+                padding: 0;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .nav-menu {
+                display: flex;
+                flex-direction: row; 
+                flex-wrap: nowrap;
+                justify-content: flex-start; 
+                align-items: center; 
+                gap: 10px;
+                padding: 8px 16px 18px; /* Padding kiri-kanan agar sejajar konten lain */
+                background: transparent;
+                width: max-content; 
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                /* Efek fade halus di sisi kanan agar menu tidak terlihat terpotong kasar */
+                -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+                mask-image: linear-gradient(to right, black 85%, transparent 100%);
+            }
+
+            .nav-menu::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-menu > li {
+                flex-shrink: 0; 
+            }
+
+            .nav-menu>li>a {
+                padding: 7px 16px;
+                font-size: 11px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 50px; /* Gaya Pill yang lebih rapi */
+                color: #fff;
+                white-space: nowrap;
+            }
+
+            /* Sembunyikan indikator dropdown dan menu dropdown di mobile agar navigasi lancar */
+            .nav-menu>li>a i.fa-angle-down, 
+            .nav-menu .dropdown-menu {
+                display: none !important;
+            }
+
+            /* Sembunyikan teks "Akun" atau nama user di mobile agar tidak sesak */
+            .user-toggle span, .user-toggle .user-name-text {
+                display: none;
+            }
+        }
     </style>
     @stack('styles')
 </head>
 
 <body>
+
     <nav class="navbar">
         <div class="navbar-inner">
 
@@ -528,32 +702,15 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('catalog', ['category' => 'accessories']) }}">AIO (All In One)</a>
+                            <li><a href="{{ route('catalog', ['category' => 'aio']) }}">AIO (All In One)</a>
                             </li>
                             <li class="has-sub">
                                 <a href="{{ route('catalog', ['category' => 'accessories']) }}">Accessories <i
-                                        class="fa-solid fa-angle-right" style="font-size:10px"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="{{ route('catalog', ['category' => 'accessories']) }}">Battery
-                                            Cell</a></li>
-                                    <li><a href="{{ route('catalog', ['category' => 'accessories']) }}">Charger</a>
-                                    </li>
-                                    <li><a href="{{ route('catalog', ['category' => 'accessories']) }}">Cotton</a></li>
-                                    <li><a href="{{ route('catalog', ['category' => 'accessories']) }}">Driptip</a>
-                                    </li>
-                                    <li><a href="{{ route('catalog', ['category' => 'accessories']) }}">Toolkit</a>
-                                    </li>
-                                </ul>
+                                        style="font-size:10px"></i></a>
                             </li>
                             <li class="has-sub">
                                 <a href="{{ route('catalog', ['category' => 'atomizer']) }}">Atomizers <i
-                                        class="fa-solid fa-angle-right" style="font-size:10px"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="{{ route('catalog', ['category' => 'atomizer']) }}">RDA</a></li>
-                                    <li><a href="{{ route('catalog', ['category' => 'atomizer']) }}">RTA</a></li>
-                                    <li><a href="{{ route('catalog', ['category' => 'atomizer']) }}">RDTA</a></li>
-                                    <li><a href="{{ route('catalog', ['category' => 'atomizer']) }}">RBA</a></li>
-                                </ul>
+                                        style="font-size:10px"></i></a>
                             </li>
                         </ul>
                     </li>
@@ -580,7 +737,82 @@
                     <a href="{{ route('login') }}"><i class="fa-solid fa-cart-shopping"></i></a>
                 @endauth
 
-                <a href="#"><i class="fa-solid fa-bell"></i></a>
+                @auth
+                    {{-- JIKA USER SUDAH LOGIN: Tampilkan dropdown notifikasi --}}
+                    <div class="user-wrap" id="notificationDropdown">
+                        <button class="user-toggle position-relative">
+                            <i class="bi bi-bell-fill fs-5"></i>
+                            {{-- Tampilkan badge merah hanya jika ada notifikasi yang belum dibaca --}}
+                            @if (auth()->user()->unreadNotifications->count() > 0)
+                                <span class="cart-badge" style="width: 15px; height: 15px; top: -5px; right: -5px;"
+                                    id="notificationCount">
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                                </span>
+                            @endif
+                        </button>
+
+                        <div class="user-dd" style="width: 300px;">
+                            {{-- Header Dropdown --}}
+                            <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-bold text-uppercase" style="font-size: 11px; letter-spacing: 0.5px;">
+                                    Notifikasi</h6>
+                                @if (auth()->user()->unreadNotifications->count() > 0)
+                                    <a href="#" class="text-muted" id="markAllRead"
+                                        style="font-size: 10px; text-decoration: underline;">Tandai semua dibaca</a>
+                                @endif
+                            </div>
+
+                            {{-- Isi Notifikasi (Looping) --}}
+                            <div style="max-height: 300px; overflow-y: auto;">
+                                @forelse(auth()->user()->notifications->take(10) as $notification)
+                                    @php
+                                        $isRead = $notification->read_at !== null;
+                                        $statusColor = $isRead
+                                            ? 'text-muted'
+                                            : ($notification->data['status'] === 'approved'
+                                                ? 'text-success'
+                                                : 'text-danger');
+                                        $statusIcon = $isRead
+                                            ? 'bi-check-lg'
+                                            : ($notification->data['status'] === 'approved'
+                                                ? 'bi-check-circle-fill'
+                                                : 'bi-x-circle-fill');
+                                    @endphp
+                                    <a href="{{ route('notifications.read', $notification->id) }}"
+                                        class="notification-item border-bottom {{ $isRead ? '' : 'bg-light' }}"
+                                        style="display: block; padding: 12px 16px;">
+                                        <div class="d-flex align-items-start gap-2">
+                                            <i class="bi {{ $statusIcon }} {{ $statusColor }}"
+                                                style="font-size: 1.1rem; margin-top: 2px;"></i>
+                                            <div class="flex-grow-1">
+                                                <div class="fw-semibold text-dark mb-1"
+                                                    style="font-size: 12px; line-height: 1.3;">
+                                                    Pesanan #{{ $notification->data['order_id'] }}
+                                                    {{ ucfirst($notification->data['status']) }}
+                                                </div>
+                                                <div class="text-muted mb-1" style="font-size: 11px; line-height: 1.4;">
+                                                    {{ Str::limit($notification->data['message'], 60, '...') }}
+                                                </div>
+                                                <div class="text-muted text-uppercase"
+                                                    style="font-size: 9px; font-weight: 600;">
+                                                    {{ $notification->created_at->diffForHumans() }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @empty
+                                    <div class="p-4 text-center text-muted">
+                                        <i class="bi bi-bell-slash-fill fs-3 mb-2 d-block"></i>
+                                        <p class="small mb-0">Tidak ada notifikasi.</p>
+                                    </div>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    {{-- JIKA USER BELUM LOGIN: Tampilkan ikon lonceng biasa yang diarahkan ke halaman login --}}
+                    <a href="{{ route('login') }}"><i class="bi bi-bell-fill fs-5"></i></a>
+                @endauth
 
                 <div class="nav-sep"></div>
 
@@ -602,7 +834,7 @@
                     <div class="user-wrap">
                         <button class="user-toggle">
                             <i class="fa-solid fa-circle-user"></i>
-                            {{ Str::limit(Auth::user()->name, 10) }}
+                            <span class="user-name-text">{{ Str::limit(Auth::user()->name, 10) }}</span>
                             <i class="fa-solid fa-angle-down" style="font-size:11px"></i>
                         </button>
                         <div class="user-dd">
@@ -619,74 +851,128 @@
                 @endauth
             </div>
 
+            {{-- ALERT MELAYANG (FLOATING) BEBAS --}}
+            @if (session()->has('success'))
+                <div id="floating-alert"
+                    style="position: fixed; top: 50px; right: 25px; z-index: 99999; background-color: #d4edda; color: #155724; padding: 12px 20px; border-radius: 8px; border: 1px solid #c3e6cb; font-family: 'Poppins', sans-serif; font-size: 13px; box-shadow: 0px 5px 15px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; transition: opacity 0.5s ease; max-width: 350px;">
+                    <i class="fa-solid fa-circle-check" style="font-size: 16px;"></i>
+                    <span>{{ session('success') }}</span>
+                </div>
+
+                <script>
+                    setTimeout(function() {
+                        let alertBox = document.getElementById('floating-alert');
+                        if (alertBox) {
+                            alertBox.style.opacity = '0';
+                            setTimeout(() => alertBox.remove(), 500); // Hilang perlahan setelah 4 detik
+                        }
+                    }, 4000);
+                </script>
+            @endif
+
         </div>
     </nav>
 
     <main>
         @yield('content')
     </main>
+
     <footer class="footer" id="footer">
         <div class="footer-inner">
 
-            {{-- LOGO --}}
-            <div class="footer-logo">
-                <img src="{{ asset('images/Logo.png') }}" alt="Twins Vapor">
-            </div>
-
-            {{-- MENU --}}
-            <div class="footer-col">
-                <h4>Menu</h4>
-                <a href="{{ route('home') }}">Beranda</a>
-                <a href="{{ route('catalog') }}">Kategori Produk</a>
-                <a href="{{ route('spk') }}">Rekomendasi</a>
-                <a href="{{ route('kontak') }}">Kontak Kami</a>
-            </div>
-
-            {{-- SOCIAL --}}
-            <div class="footer-col">
-                <h4>Sosial Media</h4>
-                <div class="footer-social-row">
-                    <i class="bi bi-instagram"></i>
-                    <span>twins.vaporshop</span>
-                </div>
-                <h4 style="margin-top:12px">Marketplace</h4>
-                <div class="footer-social-row">
-                    <img src="{{ asset('images/tokopedia.png') }}" class="market-icon" alt="Tokopedia">
-                    <span>twins.vaporshop</span>
-                </div>
-                <h4 style="margin-top:12px">WhatsApp</h4>
-                <div class="footer-social-row">
-                    <i class="fab fa-whatsapp" style="color:#25D366"></i>
-                    <span>0857-1431-4125</span>
-                </div>
-            </div>
-
-            {{-- ADDRESS --}}
-            <div class="footer-col footer-addr">
-                <h4>Alamat</h4>
-                <p class="alamat-wrap">
-                    <i class="fa-solid fa-location-dot"></i>
-                    Jl. H. Hasan No.12, RT.13/RW.8,Baru, Kec. Ps. Rebo,Kota Jakarta Timur,
-                    DKI Jakarta 13780
-                </p>
-                <h4 style="margin-bottom:10px">Maps</h4>
-                <iframe
-                    src="https://www.google.com/maps?q=Jl.%20H.%20Hasan%20No.12%20Pasar%20Rebo%20Jakarta&output=embed"
-                    allowfullscreen loading="lazy">
-                </iframe>
-                <a href="https://maps.google.com/?q=Jl.H.Hasan+No.12+Pasar+Rebo+Jakarta" target="_blank"
-                    class="maps-link">
-                    Lihat Lokasi di Google Maps
-                </a>
-            </div>
-
+        {{-- LOGO --}}
+        <div class="footer-logo">
+            <img src="{{ asset('images/Logo.png') }}" alt="Twins Vapor">
         </div>
 
-        <div class="footer-bottom">
-            &copy; {{ date('Y') }} Twins Vapor. All rights reserved.
+        {{-- MENU --}}
+        <div class="footer-col">
+            <h4>Menu</h4>
+            <a href="{{ route('home') }}">Beranda</a>
+            <a href="{{ route('catalog') }}">Kategori Produk</a>
+            <a href="{{ route('spk') }}">Rekomendasi</a>
+            <a href="{{ route('kontak') }}">Kontak Kami</a>
         </div>
-    </footer>
-    @stack('scripts')
+
+        {{-- SOCIAL --}}
+        <div class="footer-col">
+            <h4>Sosial Media</h4>
+            <div class="footer-social-row">
+                <i class="bi bi-instagram"></i>
+                <span>twins.vaporshop</span>
+            </div>
+            <h4 style="margin-top:12px">Marketplace</h4>
+            <div class="footer-social-row">
+                <img src="{{ asset('images/tokopedia.png') }}" class="market-icon" alt="Tokopedia">
+                <span>twins.vaporshop</span>
+            </div>
+            <h4 style="margin-top:12px">WhatsApp</h4>
+            <div class="footer-social-row">
+                <i class="fab fa-whatsapp" style="color:#25D366"></i>
+                <span>0857-1431-4125</span>
+            </div>
+        </div>
+
+        {{-- ADDRESS --}}
+        <div class="footer-col footer-addr">
+            <h4>Alamat</h4>
+            <p class="alamat-wrap">
+                <i class="fa-solid fa-location-dot"></i>
+                Jl. H. Hasan No.12, RT.13/RW.8,Baru, Kec. Ps. Rebo,Kota Jakarta Timur,
+                DKI Jakarta 13780
+            </p>
+            <h4 style="margin-bottom:10px">Maps</h4>
+            <iframe src="https://www.google.com/maps?q=Jl.%20H.%20Hasan%20No.12%20Pasar%20Rebo%20Jakarta&output=embed"
+                allowfullscreen loading="lazy">
+            </iframe>
+            <a href="https://maps.google.com/?q=Jl.H.Hasan+No.12+Pasar+Rebo+Jakarta" target="_blank"
+                class="maps-link">
+                Lihat Lokasi di Google Maps
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        &copy; {{ date('Y') }} Twins Vapor. All rights reserved.
+    </div>
+</footer>
+
+@auth
+    <script>
+        document.getElementById('markAllRead')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch('{{ route('notifications.markAllRead') }}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }).then(response => {
+                if (response.ok) window.location.reload();
+                else alert('Gagal memproses permintaan.');
+            }).catch(error => console.error('Error:', error));
+        });
+    </script>
+    <script>
+        // Fungsi global untuk update badge keranjang secara real-time
+        window.updateCartBadge = function(count) {
+            const badge = document.getElementById('cart-badge');
+            if (!badge) return;
+
+            const numCount = parseInt(count);
+            if (numCount > 0) {
+                badge.style.display = 'flex';
+                badge.innerText = numCount;
+            } else {
+                badge.style.display = 'none';
+                badge.innerText = '0';
+            }
+        };
+    </script>
+@endauth
+@stack('scripts')
 </body>
 
 </html>

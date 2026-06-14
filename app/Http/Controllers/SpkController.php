@@ -102,6 +102,9 @@ class SpkController extends Controller
         // Sort descending by score
         usort($scores, fn($a, $b) => $b['score'] <=> $a['score']);
 
+        // Limit to top 5 results
+        $scores = array_slice($scores, 0, 5);
+
         // Add rank
         foreach ($scores as $i => &$item) {
             $item['rank'] = $i + 1;

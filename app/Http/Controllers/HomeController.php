@@ -8,13 +8,81 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /**
+     * Fungsi Helper Privat untuk menghitung SPK (Metode SAW)
+     * Kriteria: Harga (Cost - 25%), Rating (Benefit - 40%), Pembelian (Benefit - 35%)
+     */
+    private function getSpkRecommendations($limit = 4)
+    {
+        // KITA BLOKIR KATEGORI ACCESSORIES DI SINI
+        $products = Product::with('category')
+            ->where('is_active', true)
+            ->whereHas('category', function ($query) {
+                $query->where('slug', '!=', 'accessories');
+                $query->where('slug', '!=', 'atomizer'); // <-- Mencegah aksesoris masuk hitungan
+            })
+            ->get();
+
+        if ($products->isEmpty()) {
+            return collect();
+        }
+
+        // 1. Tentukan Nilai Max/Min
+        $minPrice    = $products->min('price');
+        $maxRating   = $products->max('rating');
+        $maxPurchase = $products->max('purchase_count');
+
+        // Mencegah pembagian dengan nol
+        $minPrice    = $minPrice > 0 ? $minPrice : 1;
+        $maxRating   = $maxRating > 0 ? $maxRating : 1;
+        $maxPurchase = $maxPurchase > 0 ? $maxPurchase : 1;
+
+        // Bobot Kriteria
+        $wPrice    = 0.25; 
+        $wRating   = 0.40; 
+        $wPurchase = 0.35; 
+
+        // 2. Normalisasi & Hitung Skor Akhir
+        $products->map(function ($product) use ($minPrice, $maxRating, $maxPurchase, $wPrice, $wRating, $wPurchase) {
+            $normPrice = $minPrice / ($product->price > 0 ? $product->price : 1);
+            $normRating   = $product->rating / $maxRating;
+            $normPurchase = $product->purchase_count / $maxPurchase;
+
+            $product->rec_score = ($normPrice * $wPrice) + ($normRating * $wRating) + ($normPurchase * $wPurchase);
+            return $product;
+        });
+
+        // 3. Urutkan semua produk berdasarkan skor tertinggi
+        $sortedProducts = $products->sortByDesc('rec_score');
+
+        // 4. STRATEGI KEBERAGAMAN DINAMIS (Otomatis deteksi kategori dari database)
+        $diverseRecommendations = collect();
+        $groupedByCategory = $sortedProducts->groupBy('category_id');
+
+        foreach ($groupedByCategory as $categoryId => $productsInCategory) {
+            $diverseRecommendations->push($productsInCategory->first());
+            
+            if ($diverseRecommendations->count() >= $limit) {
+                break;
+            }
+        }
+
+        // 5. Penuhi sisa slot jika belum mencapai limit
+        if ($diverseRecommendations->count() < $limit) {
+            $remainingProducts = $sortedProducts->whereNotIn('id', $diverseRecommendations->pluck('id'))
+                                                ->take($limit - $diverseRecommendations->count());
+            
+            $diverseRecommendations = $diverseRecommendations->merge($remainingProducts);
+        }
+
+        // Kembalikan data yang sudah digabung, diurutkan ulang berdasarkan skor tertinggi
+        return $diverseRecommendations->sortByDesc('rec_score')->values();
+    }
+
     public function index()
     {
-        $featuredProducts = Product::with('category')
-            ->where('is_active', true)
-            ->orderByDesc('rating')
-            ->limit(8)
-            ->get();
+        // Fitur "Twins Rekomendasi" sekarang memanggil data cerdas dari SPK
+        $featuredProducts = $this->getSpkRecommendations(4);
 
         $liquidProducts = Product::with('category')
             ->where('is_active', true)
@@ -60,6 +128,7 @@ class HomeController extends Controller
 
         $categories = Category::withCount('products')->get();
 
+        
         return view('home.index', compact(
             'featuredProducts',
             'liquidProducts',
@@ -111,14 +180,8 @@ class HomeController extends Controller
         $products = $query->paginate(12)->appends($request->query());
         $categories = Category::all();
 
-        // Rekomendasi: skor gabungan rating (40%) + popularitas (60%), maks 4 produk
-        $maxPurchase = Product::where('is_active', true)->max('purchase_count') ?: 1;
-        $recommended = Product::with('category')
-            ->where('is_active', true)
-            ->selectRaw('*, (rating * 0.4 + (purchase_count / ?) * 5 * 0.6) as rec_score', [$maxPurchase])
-            ->orderByDesc('rec_score')
-            ->limit(4)
-            ->get();
+        // Fitur Rekomendasi di Sidebar/Header Katalog sekarang menggunakan SPK
+        $recommended = $this->getSpkRecommendations(4);
 
         return view('home.catalog', compact('products', 'categories', 'recommended'));
     }

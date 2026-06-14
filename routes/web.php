@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Pelanggan;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +17,12 @@ Route::get('/katalog', [HomeController::class, 'catalog'])->name('catalog');
 Route::get('/katalog/{product}', [HomeController::class, 'detail'])->name('product.detail');
 Route::match(['get', 'post'], '/spk', [SpkController::class, 'index'])->name('spk');
 
+// Notifikasi
+Route::middleware('auth')->group(function () {
+    Route::get('/notifications/{id}/read', [NotificationController::class, 'read'])->name('notifications.read');
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllRead'])->name('notifications.markAllRead');
+});
+
 // ── Auth ──────────────────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -23,11 +31,25 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'register']);
 });
 
+// ── Auth Google──────────────────────────────────────────────────────────────────
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// ── Lupa Password ──────────────────────────────────────────────────────────────────
+Route::get('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/reset-password/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');
 
 // ── Admin ─────────────────────────────────────────────────────────────────
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/pelanggan', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('pelanggan.index');
+Route::post('/pelanggan/{id}/toggle', [App\Http\Controllers\Admin\UserController::class, 'toggleStatus'])->name('pelanggan.toggle');
+Route::post('/pelanggan/{id}/reset', [App\Http\Controllers\Admin\UserController::class, 'resetPassword'])->name('pelanggan.reset');
+Route::get('/pelanggan/{id}/detail', [App\Http\Controllers\Admin\UserController::class, 'detail'])->name('pelanggan.detail');
 
     // Products
     Route::resource('products', Admin\ProductController::class)->except(['show']);

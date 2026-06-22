@@ -55,7 +55,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             $category = Category::findOrFail($data['category_id']);
-            $data['image'] = $request->file('image')->store($this->imageDirectory($category), 'public');
+            $data['image'] = $request->file('image')->store($this->imageDirectory($category));
         }
 
         $data['is_active'] = $request->boolean('is_active', true);
@@ -95,10 +95,10 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             if ($product->image) {
-                Storage::disk('public')->delete($product->image);
+                Storage::delete($product->image);
             }
             $category = Category::findOrFail($data['category_id']);
-            $data['image'] = $request->file('image')->store($this->imageDirectory($category), 'public');
+            $data['image'] = $request->file('image')->store($this->imageDirectory($category));
         }
 
         $data['is_active'] = $request->boolean('is_active');
@@ -111,7 +111,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         if ($product->image) {
-            Storage::disk('public')->delete($product->image);
+            Storage::delete($product->image);
         }
         $product->delete();
 

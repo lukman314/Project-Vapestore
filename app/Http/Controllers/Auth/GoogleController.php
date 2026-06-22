@@ -27,6 +27,11 @@ class GoogleController extends Controller
             $driver = Socialite::driver('google');
             $googleUser = $driver->stateless()->user();
             
+            \Log::info('Google OAuth callback', [
+                'google_user' => $googleUser->email,
+                'google_id' => $googleUser->id
+            ]);
+            
             // 1. Cari atau buat user berdasarkan email agar datanya sinkron
             $user = User::where('email', $googleUser->email)->first();
             
@@ -53,8 +58,12 @@ class GoogleController extends Controller
                 $pesanSukses = 'Pendaftaran berhasil! Selamat datang di Twins Vapor, ' . $user->name . '.';
             }
 
+            \Log::info('User found/created', ['user_id' => $user->id, 'email' => $user->email]);
+
             // --- BAGIAN YANG DIUPDATE ---
             Auth::login($user, true); 
+            
+            \Log::info('Auth::check after login', ['is_authenticated' => Auth::check(), 'user_id' => Auth::id()]);
             
             // 1. Aktifkan regenerate untuk keamanan (hindari session fixation)
             $request->session()->regenerate();
@@ -63,10 +72,13 @@ class GoogleController extends Controller
             $request->session()->put('success', $pesanSukses);
             $request->session()->save(); // Force write session sebelum redirect
             
+            \Log::info('Session saved, redirecting', ['session_id' => $request->session()->getId()]);
+            
             return $this->redirectByRole($user); 
             // ----------------------------
 
         } catch (Exception $e) {
+            \Log::error('Google OAuth error', ['message' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
             return redirect()->route('login')->with('error', 'Gagal login: ' . $e->getMessage());
         }
     }

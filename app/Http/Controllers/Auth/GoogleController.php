@@ -61,7 +61,7 @@ class GoogleController extends Controller
             
             // 2. Simpan session secara manual untuk memastikan data tertulis sebelum redirect di lingkungan cloud
             $request->session()->put('success', $pesanSukses);
-            session()->flash('success', $pesanSukses);
+            $request->session()->save(); // Force write session sebelum redirect
             
             return $this->redirectByRole($user); 
             // ----------------------------

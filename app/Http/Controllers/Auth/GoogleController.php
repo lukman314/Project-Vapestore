@@ -16,7 +16,7 @@ class GoogleController extends Controller
     {
         /** @var \Laravel\Socialite\Two\GoogleProvider $driver */
         $driver = Socialite::driver('google');
-        return $driver->stateless()->redirect();
+        return $driver->stateless()->with(['prompt' => 'select_account'])->redirect();
     }
 
     public function handleGoogleCallback(Request $request)
